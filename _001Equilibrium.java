@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class _001Equilibrium {
-
+    //approach 1: only using prefix sum, edge case to be taken care of.
     public int solve(ArrayList<Integer> A) {
         ArrayList<Long> preSum = new ArrayList<>();
         preSum.add(Long.valueOf(A.get(0)));
@@ -11,6 +12,35 @@ public class _001Equilibrium {
         System.out.println(preSum);
         for(int i=1;i<A.size()-1;i++){
             if(preSum.get(i-1)==preSum.get(A.size()-1)-preSum.get(i)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    //approach 2 : using suffix sum.
+    public int solve1(ArrayList<Integer> A) {
+        ArrayList<Long> preSum = new ArrayList<>();
+        ArrayList<Long> sufSum = new ArrayList<>();
+        preSum.add(Long.valueOf(A.get(0)));
+        //sufSum.add(Long.valueOf(A.get(A.size()-1)));
+        for(int i=1;i<A.size();i++){
+            preSum.add(preSum.get(i-1)+A.get(i));
+            sufSum.add(0L);
+        }
+        int lastIndex=A.size()-1;
+        sufSum.add(Long.valueOf(A.get(lastIndex)));
+        /*int temp=0;
+        sufSum.add(Long.valueOf(A.get(A.size()-1)));
+        for(int i=A.size()-2;i>=0;i--){
+            sufSum.add(sufSum.get(temp++)+A.get(i));
+        }*/
+        for(int i=A.size()-2;i>=0;i--){
+            sufSum.set(i,A.get(i)+sufSum.get(i+1));
+        }
+        //System.out.println(preSum);
+        //System.out.println(sufSum);
+        for(int i=0;i<A.size();i++){
+            if(Objects.equals(preSum.get(i), sufSum.get(i))){
                 return i;
             }
         }
