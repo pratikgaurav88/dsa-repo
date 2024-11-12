@@ -3,6 +3,13 @@
  * If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), 
  * design an algorithm to find the maximum profit.
  * Return the maximum possible profit.
+ * 
+ * 
+ * Solution Approach :: 
+ * Here smax is the arraylist of max from right hand side,
+ * thought process is: we need to get all max, which can’t be achived from
+ * left hand side.
+ * ex : [1, 4, 5, 2, 4] it will yeild [1, 4, 5, 5, 5]
  */
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +31,7 @@ public class _001StocksBuySell {
                 max = Math.max(max, A.get(i));
                 smax.set(i, max);
             }
-            //System.out.println(smax);
+            System.out.println(smax);
             for (int i = 0; i < A.size(); i++) {
                 answer = Math.max(answer, smax.get(i) - A.get(i));
             }
