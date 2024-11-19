@@ -1,3 +1,8 @@
+/**
+ * Problem Description
+ * You are given a N X N integer matrix. You have to find the sum of all the main diagonal elements of A.
+ * Main diagonal of a matrix A is a collection of elements A[i, j] such that i = j.
+ */
 import java.util.ArrayList;
 import java.util.List;
 
